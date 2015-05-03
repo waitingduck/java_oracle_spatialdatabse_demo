@@ -42,3 +42,4 @@ Third, you can compile the main application
 draw.java
 query.java
 mainUI.java
+These three file is lyered. mainUI.java will call fucntion in query.java and query.java will call function in draw to draw.
