@@ -24,3 +24,21 @@ When this radio button is clicked the user can select a point in the map. The ne
 Imagine a AS breaks down. The students near this AS cannot hear the announcements and hence need to go to the next nearest AS. You need to help them. When this radio button is clicked, the user can select a point in the map. The nearest Announcement System should be highlighted at this time, indicating that this is the AS that is broken. When the submit query button is pushed, the students that were covered by the broken AS system should be color coordinated with the remaining announcement systems, i.e. a student should have the same color as its second nearest announcement system. You can use any color for the announcement system here, but all AS should have different colors.
 
 
+How to use it?
+
+Compelliation:
+This program contains two part, first is population data, second is main application.
+
+First you need to compile connectDB.java which is aim to connection.
+
+Second you need to compile population class so you can insert data to your database.
+populate.java
+PopulateStudent.java
+PopulateAS.java
+PopulateBuilding.java
+PopulateAll.java
+
+Third, you can compile the main application
+draw.java
+query.java
+mainUI.java
