@@ -1,4 +1,3 @@
-package java_oracle_spatialdatabase_demo;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -16,8 +15,7 @@ public class draw {
 ///////////////////////////////normal draw function//////////////////////////////////////
 	public void as(JLabel label, String sql, Color c)
 	{
-		connectDB DB = new connectDB();
-		Connection con = DB.Connect();
+		Connection con = connectDB.Connect();
 		draw dr = new draw();
         try 
         {
@@ -66,8 +64,7 @@ public class draw {
 	
 	public void building(JLabel label, String sql, Color c)
 	{
-		connectDB DB = new connectDB();
-		Connection con = DB.Connect();
+		Connection con = connectDB.Connect();
 		draw dr = new draw();
         try 
         {
@@ -113,8 +110,7 @@ public class draw {
 	
 	public void student(JLabel label, String sql, Color c)
 	{
-		connectDB DB = new connectDB();
-		Connection con = DB.Connect();
+		Connection con = connectDB.Connect();
 		draw dr = new draw();
         try 
         {
@@ -161,8 +157,7 @@ public class draw {
 	public void as2(JLabel label, String sql, Color c)
 	{
 		boolean first = true;
-		connectDB DB = new connectDB();
-		Connection con = DB.Connect();
+		Connection con = connectDB.Connect();
 		draw dr = new draw();
         try 
         {
@@ -219,8 +214,7 @@ public class draw {
 	public void building2(JLabel label, String sql, Color c)
 	{
 		boolean first = true;
-		connectDB DB = new connectDB();
-		Connection con = DB.Connect();
+		Connection con = connectDB.Connect();
 		draw dr = new draw();
         try 
         {
@@ -275,8 +269,7 @@ public class draw {
 	public void student2(JLabel label, String sql, Color c)
 	{
 		boolean first = true;
-		connectDB DB = new connectDB();
-		Connection con = DB.Connect();
+		Connection con = connectDB.Connect();
 		draw dr = new draw();
         try 
         {
@@ -331,8 +324,7 @@ public class draw {
 	public String as4a(JLabel label, String sql, Color c)
 	{
 		boolean first = true;
-		connectDB DB = new connectDB();
-		Connection con = DB.Connect();
+		Connection con = connectDB.Connect();
 		draw dr = new draw();
 		String asid = "";
         try 
@@ -391,8 +383,7 @@ public class draw {
 ///////////////////////draw the student in the selected AS range////////////////////////////////////////////////////////
 	public void as4b(JLabel label, String sql)
 	{
-		connectDB DB = new connectDB();
-		Connection con = DB.Connect();
+		Connection con = connectDB.Connect();
 		draw dr = new draw();
         try 
         {
@@ -474,8 +465,7 @@ public class draw {
 			ass[i] = "";
 		}
 		
-		connectDB DB = new connectDB();
-		Connection con = DB.Connect();
+		Connection con = connectDB.Connect();
 		draw dr = new draw();
         try 
         {

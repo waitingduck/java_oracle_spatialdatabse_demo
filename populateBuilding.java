@@ -1,4 +1,3 @@
-package java_oracle_spatialdatabase_demo;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

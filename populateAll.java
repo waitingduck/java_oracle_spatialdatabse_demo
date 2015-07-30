@@ -1,4 +1,3 @@
-package java_oracle_spatialdatabase_demo;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -7,8 +6,7 @@ public class populateAll{
 	public static void main(String[] args){
 		
 		//create conntection to DB
-		connectDB DB = new connectDB();
-		Connection connection = DB.Connect();
+		Connection connection = connectDB.Connect();
 		
 		
 		//create an array to store every data to populate
@@ -21,7 +19,5 @@ public class populateAll{
 			x.populateData(connection);
 		}
 		
-		//close DB connection after population
-		DB.Close(connection);
 	}
 }

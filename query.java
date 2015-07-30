@@ -1,4 +1,4 @@
-package java_oracle_spatialdatabase_demo;
+
 import java.awt.Color;
 
 

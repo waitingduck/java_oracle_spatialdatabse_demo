@@ -1,0 +1,8 @@
+DROP TABLE ANNOUNCESYS;
+DROP TABLE BUILDING;
+DROP TABLE STUDENT;
+
+DELETE FROM user_sdo_geom_metadata
+WHERE table_name='ANNOUNCESYS'
+   OR table_name='BUILDING'
+   OR table_name='STUDENT';
