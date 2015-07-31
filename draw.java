@@ -11,6 +11,9 @@ import javax.swing.JLabel;
 
 
 public class draw {
+	// I will put this code here to remind me never to code like this again!
+	
+	
 	
 ///////////////////////////////normal draw function//////////////////////////////////////
 	public void as(JLabel label, String sql, Color c)
