@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 public class drawElement {
-	public void as(JLabel label, String sql, Color c)
+	public void as(JLabel label, String sql, Color[] colorSet, howToColor htc)
 	{
 		Connection con = connectDB.Connect();
-		draw dr = new draw();
+		draw2 dr = new draw2();
         try 
         {
 			con.setAutoCommit(true);
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
-			ArrayList<AS> xyList = new ArrayList<AS>();
+			ArrayList<AS> ASList = new ArrayList<AS>();
 			
 			while(rs.next())
 			{
@@ -26,16 +26,15 @@ public class drawElement {
 	            int yp = rs.getInt("ASPOINT.SDO_POINT.Y");
 	            int r = rs.getInt("RADIUS");
 	            
-	            System.out.println("[" + xp + "," + yp + "}");
+	            System.out.println("[" + xp + "," + yp + "]");
 
 	            AS temp = new AS(xp,yp,r);
-	            xyList.add(temp);
-
-//	            dr.draw(label, xp-r, yp-r, 2*r, c);  
-//	            dr.filleddraw(label,x,y,4,c);  
+	            ASList.add(temp);
+ 
 			}
 			//add super draw function
-			
+			//dr.drawASList(label, ASList, colorSet, htc);
+			dr.superDraw(label, ASList, colorSet, htc);
         } 
         catch (SQLException e)
         {
@@ -44,10 +43,10 @@ public class drawElement {
 		}
 	}
 	
-	public void building(JLabel label, String sql, Color c)
+	public void building(JLabel label, String sql, Color[] colorSet, howToColor htc)
 	{
 		Connection con = connectDB.Connect();
-		draw dr = new draw();
+		draw2 dr = new draw2();
         try 
         {
 			con.setAutoCommit(true);
@@ -58,20 +57,20 @@ public class drawElement {
 			while(rs.next())
 			{
 				
-	            int nn = rs.getInt("NODENUMBER");
-	            System.out.println(nn);
+	            int nodeNumber = rs.getInt("NODENUMBER");
+	            System.out.println(nodeNumber);
 	            
 	            Array rsArr = rs.getArray("shape.SDO_ORDINATES");
 	            Number[] pos = (Number[])rsArr.getArray();
-	            Building temp = new Building(nn);
+	            Building temp = new Building(nodeNumber);
 	            for(int k=0;k<pos.length;k+=2){
 	            	temp.setNode(0, k/2, pos[k].intValue());
 	            	temp.setNode(1, k/2, pos[k].intValue());
 	            }
-	            buildingList.add(temp);
-	            //dr.draw(label,x,y,nn,c);  
+	            buildingList.add(temp); 
 			}
 			//add a super draw function here
+			dr.superDraw(label, buildingList, colorSet, htc);
         } 
         catch (SQLException e)
         {
@@ -80,10 +79,10 @@ public class drawElement {
 		} 
 	}
 	
-	public void student(JLabel label, String sql, Color c)
+	public void student(JLabel label, String sql, Color[] colorSet, howToColor htc)
 	{
 		Connection con = connectDB.Connect();
-		draw dr = new draw();
+		draw2 dr = new draw2();
         try 
         {
 			con.setAutoCommit(true);
@@ -102,6 +101,7 @@ public class drawElement {
 	            //dr.filleddraw(label,x,y,4,c);  
 			}
 			//put super draw function here
+			dr.superDraw(label, studentList, colorSet, htc);
         } 
         catch (SQLException e)
         {
