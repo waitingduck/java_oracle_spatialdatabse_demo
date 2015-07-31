@@ -1,5 +1,8 @@
+import java.awt.Color;
 
-public class Building {
+import javax.swing.JLabel;
+
+public class Building implements element {
 	private int[][] xy;
 	public Building(int nodeNumber){
 		xy = new int[2][nodeNumber];
@@ -15,5 +18,9 @@ public class Building {
 	}
 	public int getNodeNumber(){
 		return xy[0].length;
+	}
+	public void render(JLabel label, Color c){
+		basicDraw dr = new basicDraw();
+		dr.draw(label,xy[0],xy[1],xy[0].length,c); 
 	}
 }

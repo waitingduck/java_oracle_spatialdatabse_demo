@@ -1,5 +1,8 @@
+import java.awt.Color;
 
-public class AS {
+import javax.swing.JLabel;
+
+public class AS implements element {
 	private int xLeftUpper=0;
 	private int yLeftUpper=0;
 	private int squareRadius=0;
@@ -36,5 +39,10 @@ public class AS {
 	}
 	public int[] getYs(){
 		return centerSquare[1];
+	}
+	public void render(JLabel label, Color c){
+		basicDraw dr = new basicDraw();
+		dr.draw(label, xLeftUpper, yLeftUpper, squareRadius, c);  
+        dr.filleddraw(label,centerSquare[0],centerSquare[1],4,c);
 	}
 }
