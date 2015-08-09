@@ -126,87 +126,7 @@ public class mainUI extends JFrame{
 			frame.getContentPane().add(rb);
 			Bgroup.add(rb);
 		}
-//		
-//		final JRadioButton RadioButton1 = new JRadioButton("Whole Region");
-//		RadioButton1.setBounds(846, 196, 132, 49);
-//		RadioButton1.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//            	if(RadioButton1.isSelected())
-//            	{
-//            		label.repaint();
-//            		button[3] = 1;
-//            		polygon = "";
-//            		temppolygon = "";
-//            	}
-//            }
-//        });
-//		frame.getContentPane().add(RadioButton1);
-//		Bgroup.add(RadioButton1);
-//		
-//		final JRadioButton RadioButton2 = new JRadioButton("Point Query");
-//		RadioButton2.setBounds(846, 247, 132, 49);
-//		RadioButton2.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//            	if(RadioButton2.isSelected())
-//            	{
-//            		label.repaint();
-//            		button[3] = 2;
-//            		polygon = "";
-//            		temppolygon = "";
-//            	}
-//            }
-//        });
-//		frame.getContentPane().add(RadioButton2);
-//		Bgroup.add(RadioButton2);
-//		
-//		final JRadioButton RadioButton3 = new JRadioButton("Range Query");
-//		RadioButton3.setBounds(846, 298, 132, 49);
-//		RadioButton3.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//            	if(RadioButton3.isSelected())
-//            	{
-//            		label.repaint();
-//            		button[3] = 3;
-//            		polygon = "";
-//            		temppolygon = "";
-//            	}
-//            }
-//        });
-//		frame.getContentPane().add(RadioButton3);
-//		Bgroup.add(RadioButton3);
-//		
-//		final JRadioButton RadioButton4 = new JRadioButton("Surrounding Student");
-//		RadioButton4.setBounds(846, 349, 132, 49);
-//		RadioButton4.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//            	if(RadioButton4.isSelected())
-//            	{
-//            		label.repaint();
-//            		button[3] = 4;
-//            		polygon = "";
-//            		temppolygon = "";
-//            	}
-//            }
-//        });
-//		frame.getContentPane().add(RadioButton4);
-//		Bgroup.add(RadioButton4);
-//		
-//		final JRadioButton RadioButton5 = new JRadioButton("Emergency Query");
-//		RadioButton5.setBounds(846, 400, 132, 49);
-//		RadioButton5.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//            	if(RadioButton5.isSelected())
-//            	{
-//            		label.repaint();
-//            		button[3] = 5;
-//            		polygon = "";
-//            		temppolygon = "";
-//            	}
-//            }
-//        });
-//		frame.getContentPane().add(RadioButton5);
-//		Bgroup.add(RadioButton5);
-		
+
 //////////////////////////submit button!/////////////////////////////////////////////////////////////////
 		JButton btnNewButton = new JButton("Submit Query");
 		btnNewButton.setBounds(850, 507, 185, 93);
@@ -247,10 +167,8 @@ public class mainUI extends JFrame{
 		frame.getContentPane().add(scrollPane);
 		
 //////////////////////////////mouseListener/////////////////////////////////////////////////////////////////////////////
-		panel.addMouseMotionListener(new MouseMotionAdapter()
-		  {
-		   public void mouseMoved(MouseEvent e)
-		   {
+		panel.addMouseMotionListener(new MouseMotionAdapter(){
+		   public void mouseMoved(MouseEvent e){
 		    int x=e.getX(); 
 		    int y=e.getY(); 
 		    String s="  " + x + ","  + y ;
