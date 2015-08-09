@@ -72,7 +72,7 @@ public class mainUI extends JFrame{
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(false);
 		
-		ImageIcon background = new ImageIcon("image\\map.jpg");
+		ImageIcon background = new ImageIcon("src/image/map.jpg");
 		label = new JLabel();
 		label.setBounds(0, 0, 820, 580);
 		label.setIcon(background);
@@ -86,131 +86,126 @@ public class mainUI extends JFrame{
 		final query query = new query();
 		
 ///////////////////////CheckBox/////////////////////////////////////////////////////////////////////////
-		final JCheckBox ASCheckBox = new JCheckBox("AS");
-		ASCheckBox.setBounds(846, 10, 132, 49);
-		ASCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	//label.repaint();
-            	if(ASCheckBox.isSelected()){
-            		button[0] = 1;
-            	}
-            	else{
-            		button[0] = 0;
-            	}
-            }
-        });
-		frame.getContentPane().add(ASCheckBox);
+		String[] checkBox = {"AS", "Buildings", "Students"};
 		
-		final JCheckBox BCheckBox = new JCheckBox("Buildings");
-		BCheckBox.setBounds(846, 61, 132, 49);
-		BCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	//label.repaint();
-            	if(BCheckBox.isSelected()){
-            		button[1] = 1;
-            	}
-            	else{
-            		button[1] = 0;
-            	}
-            }
-        });
-		frame.getContentPane().add(BCheckBox);
-		
-		final JCheckBox SCheckBox = new JCheckBox("Student");
-		SCheckBox.setBounds(846, 112, 132, 49);
-		SCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	//label.repaint();
-            	if(SCheckBox.isSelected()){
-            		button[2] = 1;
-            	}
-            	else{
-            		button[2] = 0;
-            	}
-            }
-        });
-		frame.getContentPane().add(SCheckBox);
+		for(int i=0;i<checkBox.length;i++){
+			final JCheckBox cb = new JCheckBox(checkBox[i]);
+			final int checkButtonIndex = i;
+			cb.setBounds(846, 10+i*50, 132, 49);
+			cb.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	            	//label.repaint();
+	            	if(cb.isSelected()){
+	            		button[checkButtonIndex] = 1;
+	            	}
+	            	else{
+	            		button[checkButtonIndex] = 0;
+	            	}
+	            }
+	        });
+			frame.getContentPane().add(cb);
+		}
 
 ///////////////////////////RadioButton////////////////////////////////////////////////////////////////////////////////
-		final JRadioButton RadioButton1 = new JRadioButton("Whole Region");
-		RadioButton1.setBounds(846, 196, 132, 49);
-		RadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	if(RadioButton1.isSelected())
-            	{
-            		label.repaint();
-            		button[3] = 1;
-            		polygon = "";
-            		temppolygon = "";
-            	}
-            }
-        });
-		frame.getContentPane().add(RadioButton1);
-		Bgroup.add(RadioButton1);
-		
-		final JRadioButton RadioButton2 = new JRadioButton("Point Query");
-		RadioButton2.setBounds(846, 247, 132, 49);
-		RadioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	if(RadioButton2.isSelected())
-            	{
-            		label.repaint();
-            		button[3] = 2;
-            		polygon = "";
-            		temppolygon = "";
-            	}
-            }
-        });
-		frame.getContentPane().add(RadioButton2);
-		Bgroup.add(RadioButton2);
-		
-		final JRadioButton RadioButton3 = new JRadioButton("Range Query");
-		RadioButton3.setBounds(846, 298, 132, 49);
-		RadioButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	if(RadioButton3.isSelected())
-            	{
-            		label.repaint();
-            		button[3] = 3;
-            		polygon = "";
-            		temppolygon = "";
-            	}
-            }
-        });
-		frame.getContentPane().add(RadioButton3);
-		Bgroup.add(RadioButton3);
-		
-		final JRadioButton RadioButton4 = new JRadioButton("Surrounding Student");
-		RadioButton4.setBounds(846, 349, 132, 49);
-		RadioButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	if(RadioButton4.isSelected())
-            	{
-            		label.repaint();
-            		button[3] = 4;
-            		polygon = "";
-            		temppolygon = "";
-            	}
-            }
-        });
-		frame.getContentPane().add(RadioButton4);
-		Bgroup.add(RadioButton4);
-		
-		final JRadioButton RadioButton5 = new JRadioButton("Emergency Query");
-		RadioButton5.setBounds(846, 400, 132, 49);
-		RadioButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	if(RadioButton5.isSelected())
-            	{
-            		label.repaint();
-            		button[3] = 5;
-            		polygon = "";
-            		temppolygon = "";
-            	}
-            }
-        });
-		frame.getContentPane().add(RadioButton5);
-		Bgroup.add(RadioButton5);
+		String[] radioButton = {"Whole Region","Point Query","Range Query","Surrounding Student","Emergency Query"};
+		for(int i=0;i<radioButton.length;i++){
+			final JRadioButton rb = new JRadioButton(radioButton[i]);
+			final int radioButtonIndex = i+1;
+			rb.setBounds(846, 196+i*50, 132, 49);
+			rb.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	            	if(rb.isSelected())
+	            	{
+	            		label.repaint();
+	            		button[3] = radioButtonIndex;
+	            		polygon = "";
+	            		temppolygon = "";
+	            	}
+	            }
+	        });
+			frame.getContentPane().add(rb);
+			Bgroup.add(rb);
+		}
+//		
+//		final JRadioButton RadioButton1 = new JRadioButton("Whole Region");
+//		RadioButton1.setBounds(846, 196, 132, 49);
+//		RadioButton1.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//            	if(RadioButton1.isSelected())
+//            	{
+//            		label.repaint();
+//            		button[3] = 1;
+//            		polygon = "";
+//            		temppolygon = "";
+//            	}
+//            }
+//        });
+//		frame.getContentPane().add(RadioButton1);
+//		Bgroup.add(RadioButton1);
+//		
+//		final JRadioButton RadioButton2 = new JRadioButton("Point Query");
+//		RadioButton2.setBounds(846, 247, 132, 49);
+//		RadioButton2.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//            	if(RadioButton2.isSelected())
+//            	{
+//            		label.repaint();
+//            		button[3] = 2;
+//            		polygon = "";
+//            		temppolygon = "";
+//            	}
+//            }
+//        });
+//		frame.getContentPane().add(RadioButton2);
+//		Bgroup.add(RadioButton2);
+//		
+//		final JRadioButton RadioButton3 = new JRadioButton("Range Query");
+//		RadioButton3.setBounds(846, 298, 132, 49);
+//		RadioButton3.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//            	if(RadioButton3.isSelected())
+//            	{
+//            		label.repaint();
+//            		button[3] = 3;
+//            		polygon = "";
+//            		temppolygon = "";
+//            	}
+//            }
+//        });
+//		frame.getContentPane().add(RadioButton3);
+//		Bgroup.add(RadioButton3);
+//		
+//		final JRadioButton RadioButton4 = new JRadioButton("Surrounding Student");
+//		RadioButton4.setBounds(846, 349, 132, 49);
+//		RadioButton4.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//            	if(RadioButton4.isSelected())
+//            	{
+//            		label.repaint();
+//            		button[3] = 4;
+//            		polygon = "";
+//            		temppolygon = "";
+//            	}
+//            }
+//        });
+//		frame.getContentPane().add(RadioButton4);
+//		Bgroup.add(RadioButton4);
+//		
+//		final JRadioButton RadioButton5 = new JRadioButton("Emergency Query");
+//		RadioButton5.setBounds(846, 400, 132, 49);
+//		RadioButton5.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//            	if(RadioButton5.isSelected())
+//            	{
+//            		label.repaint();
+//            		button[3] = 5;
+//            		polygon = "";
+//            		temppolygon = "";
+//            	}
+//            }
+//        });
+//		frame.getContentPane().add(RadioButton5);
+//		Bgroup.add(RadioButton5);
 		
 //////////////////////////submit button!/////////////////////////////////////////////////////////////////
 		JButton btnNewButton = new JButton("Submit Query");
