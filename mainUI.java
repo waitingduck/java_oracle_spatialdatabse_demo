@@ -6,6 +6,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -184,13 +186,12 @@ public class mainUI extends JFrame{
 			{}
 
 			@Override
-			public void mousePressed(MouseEvent e) 
-			{
-				if(button[3] == 2)//point query. draw a point and a range of it
-				{
-					if(SwingUtilities.isLeftMouseButton(e))
-					{
-				    
+			public void mousePressed(MouseEvent e) {
+				if(button[3] == 2){
+					//point query. draw a point and a range of it
+					
+					if(SwingUtilities.isLeftMouseButton(e)){
+						label.repaint();
 					draw dr = new draw();
 					
 					System.out.println("[" + e.getX() + "," + e.getY() + "]");
@@ -209,9 +210,17 @@ public class mainUI extends JFrame{
 					pxarr[3] = pointx + 2;
 					pyarr[3] = pointy + 2;
 		            
+					Timer timer = new Timer();
+					timer.schedule(new TimerTask() {
+						  @Override
+						  public void run() {
+							  dr.filleddraw(label,pxarr,pyarr,4,Color.red);
+								dr.draw(label, pointx-50, pointy-50, 100, Color.red);
+						  }
+						}, 30);
 					
-					dr.filleddraw(label,pxarr,pyarr,4,Color.red);
-					dr.draw(label, pointx-50, pointy-50, 100, Color.red);
+//					dr.filleddraw(label,pxarr,pyarr,4,Color.red);
+//					dr.draw(label, pointx-50, pointy-50, 100, Color.red);
 					}
 				}
 				else if(button[3] == 3)// draw a polygon,and record the polygon in temppolygon which will be cleared after click right mouse button
