@@ -37,6 +37,7 @@ public class mainUI extends JFrame{
     private String temppolygon = "";
     private Queue<Integer> q=new LinkedList<Integer>();;
     private int NodeCount = 0;
+    private boolean painted = true;
 	/**
 	 * Launch the application.
 	 */
@@ -122,6 +123,7 @@ public class mainUI extends JFrame{
 	            		button[3] = radioButtonIndex;
 	            		polygon = "";
 	            		temppolygon = "";
+	            		painted = true;
 	            	}
 	            }
 	        });
@@ -210,6 +212,7 @@ public class mainUI extends JFrame{
 					pxarr[3] = pointx + 2;
 					pyarr[3] = pointy + 2;
 		            
+					//need to schedule otherwise will have collision with previous repaint function
 					Timer timer = new Timer();
 					timer.schedule(new TimerTask() {
 						  @Override
@@ -229,7 +232,10 @@ public class mainUI extends JFrame{
 					{
 				    
 						draw dr = new draw();
-					
+						if(painted){
+							label.repaint();
+							painted = false;
+						}
 						System.out.println("[" + e.getX() + "," + e.getY() + "]");
 						pointx = e.getX();
 						pointy = e.getY();
@@ -260,14 +266,22 @@ public class mainUI extends JFrame{
 						pyarr[3] = pointy + 2;
 		            
 					
-						dr.filleddraw(label,pxarr,pyarr,4,Color.red);
+						Timer timer = new Timer();
+						timer.schedule(new TimerTask() {
+							  @Override
+							  public void run() {
+								  dr.filleddraw(label,pxarr,pyarr,4,Color.red);
+							  }
+							}, 30);
+						
+//						dr.filleddraw(label,pxarr,pyarr,4,Color.red);
 						System.out.println(temppolygon);
 					}
 					if(SwingUtilities.isRightMouseButton(e))  //transfer the tempolygon to polygon and add the first node to it in order to close it.  
 					{                                         // then clear the temppolygon
 				    
 						draw dr = new draw();
-						
+						painted = true;
 						int[] xarr = new int[NodeCount]; 
 					    int[] yarr = new int[NodeCount];
 					    int i = 0;
