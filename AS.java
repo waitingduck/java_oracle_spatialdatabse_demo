@@ -7,8 +7,9 @@ public class AS implements element {
 	private int yLeftUpper=0;
 	private int squareRadius=0;
 	private int[][] centerSquare = new int[2][4];
+	private String ASID = "";
 	
-	public AS(int xCenter,int yCenter,int r){
+	public AS(int xCenter,int yCenter,int r, String asid){
 		xLeftUpper = xCenter-r;
 		yLeftUpper = yCenter-r;
 		squareRadius = r*2;
@@ -24,6 +25,9 @@ public class AS implements element {
         
 		centerSquare[0][3] = xCenter+7;
 		centerSquare[1][3] = yCenter+7;
+		
+		ASID = asid;
+		//System.out.println("Create new AS with x: " + xCenter + ", y: " + yCenter + ", r: " + r);
 	}
 	public int getXLU(){
 		return xLeftUpper;
@@ -39,6 +43,9 @@ public class AS implements element {
 	}
 	public int[] getYs(){
 		return centerSquare[1];
+	}
+	public String getASid(){
+		return ASID;
 	}
 	public void render(JLabel label, Color c){
 		basicDraw dr = new basicDraw();

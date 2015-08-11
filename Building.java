@@ -4,8 +4,8 @@ import javax.swing.JLabel;
 
 public class Building implements element {
 	private int[][] xy;
-	public Building(int nodeNumber){
-		xy = new int[2][nodeNumber];
+public Building(int nodeNumber, int[][] nodes){
+		xy = nodes;
 	}
 	public void setNode(int i, int j, int value){
 		xy[i][j] = value;
