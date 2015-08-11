@@ -194,7 +194,7 @@ public class mainUI extends JFrame{
 					
 					if(SwingUtilities.isLeftMouseButton(e)){
 						label.repaint();
-					draw dr = new draw();
+					final draw dr = new draw();
 					
 					System.out.println("[" + e.getX() + "," + e.getY() + "]");
 					pointx = e.getX();
@@ -218,7 +218,7 @@ public class mainUI extends JFrame{
 						  @Override
 						  public void run() {
 							  dr.filleddraw(label,pxarr,pyarr,4,Color.red);
-								dr.draw(label, pointx-50, pointy-50, 100, Color.red);
+							  dr.draw(label, pointx-50, pointy-50, 100, Color.red);
 						  }
 						}, 30);
 					
@@ -231,7 +231,7 @@ public class mainUI extends JFrame{
 					if(SwingUtilities.isLeftMouseButton(e))
 					{
 				    
-						draw dr = new draw();
+						final draw dr = new draw();
 						if(painted){
 							label.repaint();
 							painted = false;
