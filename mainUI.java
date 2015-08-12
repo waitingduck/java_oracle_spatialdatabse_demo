@@ -114,7 +114,7 @@ public class mainUI extends JFrame{
 		for(int i=0;i<radioButton.length;i++){
 			final JRadioButton rb = new JRadioButton(radioButton[i]);
 			final int radioButtonIndex = i+1;
-			rb.setBounds(846, 196+i*50, 132, 49);
+			rb.setBounds(846, 196+i*50, 180, 49);
 			rb.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
 	            	if(rb.isSelected())
