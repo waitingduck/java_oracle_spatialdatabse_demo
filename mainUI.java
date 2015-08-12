@@ -89,6 +89,8 @@ public class mainUI extends JFrame{
 		final query query = new query();
 		
 ///////////////////////CheckBox/////////////////////////////////////////////////////////////////////////
+//user can choose what kind of element will show on the map
+//button selection will be recorded in array button[0:AS, 1:Buildings, 2:Student]
 		String[] checkBox = {"AS", "Buildings", "Students"};
 		
 		for(int i=0;i<checkBox.length;i++){
@@ -110,6 +112,8 @@ public class mainUI extends JFrame{
 		}
 
 ///////////////////////////RadioButton////////////////////////////////////////////////////////////////////////////////
+//different interaction mode with exclusive radio button. 
+//button will be recored in array button[3:the index of the choice]
 		String[] radioButton = {"Whole Region","Point Query","Range Query","Surrounding Student","Emergency Query"};
 		for(int i=0;i<radioButton.length;i++){
 			final JRadioButton rb = new JRadioButton(radioButton[i]);
