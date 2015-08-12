@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 public class draw2 {
 	
-	public void superDraw(JLabel label, ArrayList list, Color[] colorSet){
+	public void superDraw(JLabel label, ArrayList<element> list, Color[] colorSet){
 		superDraw(label,list,colorSet, new howToColor(){
 			@Override
 			public Color getColor(int index, Color[] colorSet){
@@ -15,9 +15,9 @@ public class draw2 {
 		});
 	}
 	
-	public void superDraw(JLabel label, ArrayList list, Color[] colorSet, howToColor htc){
-		for(Object obj:list){
-			((element)obj).render(label,htc.getColor(list.indexOf(obj), colorSet));
+	public void superDraw(JLabel label, ArrayList<element> list, Color[] colorSet, howToColor htc){
+		for(element obj:list){
+			obj.render(label,htc.getColor(list.indexOf(obj), colorSet));
 		}
 	}
 	

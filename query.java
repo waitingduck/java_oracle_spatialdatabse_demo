@@ -187,7 +187,7 @@ public class query {
 		return qcount;
 	}
 	
-	public ArrayList ASQuery(String sql){
+	public ArrayList<element> ASQuery(String sql){
 		Connection con = connectDB.Connect();
 		ArrayList<element> result = new ArrayList<element>();
         try{
@@ -208,7 +208,7 @@ public class query {
         return result;
 	}
 	
-	public ArrayList buildingQuery(String sql){
+	public ArrayList<element> buildingQuery(String sql){
 		Connection con = connectDB.Connect();
 		ArrayList<element> result = new ArrayList<element>();
 		
@@ -242,7 +242,7 @@ public class query {
         return result;
 	}
     
-	public ArrayList studentQuery(String sql){
+	public ArrayList<element> studentQuery(String sql){
 		Connection con = connectDB.Connect();
 		ArrayList<element> result = new ArrayList<element>();
         try 
