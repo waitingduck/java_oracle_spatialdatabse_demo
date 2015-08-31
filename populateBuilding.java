@@ -18,7 +18,7 @@ public class populateBuilding implements populate{
 	
 	    //try to read file
 		try{
-			inputrow = new Scanner(new FileInputStream("data\\buildings.xy"));
+			inputrow = new Scanner(new FileInputStream("src\\data\\buildings.xy"));
 		}
 		catch(FileNotFoundException e){
 			System.out.println("file is not found");

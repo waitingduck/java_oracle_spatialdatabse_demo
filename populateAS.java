@@ -19,7 +19,7 @@ public class populateAS implements populate{
 	
 	    //try to read file
 		try{
-			inputrow = new Scanner(new FileInputStream("data\\announcementSystems.xy"));
+			inputrow = new Scanner(new FileInputStream("src\\data\\announcementSystems.xy"));
 		}
 		catch(FileNotFoundException e){
 			System.out.println("file is not found");

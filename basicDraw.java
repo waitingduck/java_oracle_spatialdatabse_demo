@@ -3,73 +3,61 @@ import java.awt.Graphics;
 
 import javax.swing.JLabel;
 
-public class basicDraw {
-	public void draw(JLabel label,int[] x,int[] y, int nn, Color c)  //draw a polygon
-	{
-		Graphics g = label.getGraphics();
-	    g.setColor(c);
-	    g.drawPolygon(x,y,nn);
-	    g.dispose(); 
+public class BasicDraw {
+	
+	JLabel label;
+	Graphics graphics;
+	
+	public BasicDraw(JLabel label){
+		this.label = label;
+		graphics = this.label.getGraphics();
 	}
 	
-	public void filleddraw(JLabel label,int[] x,int[] y, int nn, Color c)  //draw a filled polygon
+	public void draw(int[] x,int[] y, int nn, Color c)  //draw a polygon
 	{
-		Graphics g = label.getGraphics();
-	    g.setColor(c);
-	    g.fillPolygon(x,y,nn);
-	    g.dispose(); 
+		graphics.setColor(c);
+		graphics.drawPolygon(x,y,nn);
+		//graphics.dispose(); 
 	}
 	
-	public void draw(JLabel label,int x,int y, int r, Color c)  //draw a circle
+	public void filleddraw(int[] x,int[] y, int nn, Color c)  //draw a filled polygon
 	{
-		Graphics g = label.getGraphics();
-	    g.setColor(c);
-	    g.drawOval(x,y,r,r);
-	    g.dispose(); 
+		graphics.setColor(c);
+		graphics.fillPolygon(x,y,nn);
+		//graphics.dispose(); 
 	}
 	
-	public Color getColor(int flag)
+	public void draw(int x,int y, int r, Color c)  //draw a circle
 	{
-		Color c = Color.black;
-		switch(flag)
-		{
-			case 0:
-				c = Color.blue;
-				break;
-			case 1:
-				c = Color.cyan;
-				break;
-			case 2:
-				c = Color.green;
-				break;
-			case 3:
-				c = Color.yellow;
-				break;
-			case 4:
-				c = Color.white;
-				break;
-			case 5:
-				c = Color.orange;
-				break;
-			case 6:
-				c = Color.pink;
-				break;
-		}
-		return c;
+		graphics.setColor(c);
+		graphics.drawOval(x,y,r,r);
+		//graphics.dispose(); 
 	}
-	public int checkAS(String[] ass, String as)
-	{
-		int position = 0;
-		
-		for(int i = 0; i < 7; i++)
-		{
-			position = i;
-			if(ass[i].equals(as))
-			{
-				break;
-			}
-		}
-		return position;
-	}
+	
+//	public void draw(JLabel label,int[] x,int[] y, int nn, Color c)  //draw a polygon
+//	{
+//		Graphics graphics = label.getGraphics();
+//		graphics.setColor(c);
+//		graphics.drawPolygon(x,y,nn);
+//		graphics.dispose(); 
+//	}
+//	
+//	public void filleddraw(JLabel label,int[] x,int[] y, int nn, Color c)  //draw a filled polygon
+//	{
+//		Graphics g = label.getGraphics();
+//	    g.setColor(c);
+//	    g.fillPolygon(x,y,nn);
+//	    g.dispose(); 
+//	}
+//	
+//	public void draw(JLabel label,int x,int y, int r, Color c)  //draw a circle
+//	{
+//		Graphics g = label.getGraphics();
+//	    g.setColor(c);
+//	    g.drawOval(x,y,r,r);
+//	    g.dispose(); 
+//	}
+	
+	
 	
 }

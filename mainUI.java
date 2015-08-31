@@ -28,16 +28,18 @@ public class mainUI extends JFrame{
 	private JTextArea sqlTextArea;  //textarea which show the sql query
 	private JPanel panel;
 	private int[] button = {0,0,0,0};  //record current button 
-	private int QueryCount = 1;  //record current query number
-	private int pointx = 0;  // record current mouse point
-	private int pointy = 0;  
-	int[] pxarr = new int[4]; //to draw the square on the map
-    int[] pyarr = new int[4];
+	private int queryCount = 1;  //record current query number
+	
+	private int pointX = 0;  // record current mouse point
+	private int pointY = 0;  
+	int[] pointXArr = new int[4]; //to draw the square on the map
+    int[] pointYArr = new int[4];
     private String polygon = "";
-    private String temppolygon = "";
-    private Queue<Integer> q=new LinkedList<Integer>();;
-    private int NodeCount = 0;
+    private String tempPolygon = "";
+    private Queue<Integer> q =new LinkedList<Integer>();;
+    private int nodeCount = 0;
     private boolean painted = true;
+    private String nearstASid = "";
 	/**
 	 * Launch the application.
 	 */
@@ -69,7 +71,7 @@ public class mainUI extends JFrame{
 		
 		ButtonGroup Bgroup = new ButtonGroup();
 		
-		frame = new JFrame("CHENG, WEI-TING  8181471882");
+		frame = new JFrame("Spatial database demo");
 		frame.setBounds(0, 0, 1100, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -86,17 +88,16 @@ public class mainUI extends JFrame{
 		panel.setBounds(10, 10, 830, 590);
 		frame.getContentPane().add(panel);
 		
-		final query query = new query();
 		
 ///////////////////////CheckBox/////////////////////////////////////////////////////////////////////////
 //user can choose what kind of element will show on the map
 //button selection will be recorded in array button[0:AS, 1:Buildings, 2:Student]
-		String[] checkBox = {"AS", "Buildings", "Students"};
+		String[] checkBox = {"<html> Announcement <br> System</html>", "Buildings", "Students"};
 		
 		for(int i=0;i<checkBox.length;i++){
-			final JCheckBox cb = new JCheckBox(checkBox[i]);
-			final int checkButtonIndex = i;
-			cb.setBounds(846, 10+i*50, 132, 49);
+			JCheckBox cb = new JCheckBox(checkBox[i]);
+			int checkButtonIndex = i;
+			cb.setBounds(846, 10+i*50, 132, 50);
 			cb.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
 	            	//label.repaint();
@@ -116,8 +117,8 @@ public class mainUI extends JFrame{
 //button will be recored in array button[3:the index of the choice]
 		String[] radioButton = {"Whole Region","Point Query","Range Query","Surrounding Student","Emergency Query"};
 		for(int i=0;i<radioButton.length;i++){
-			final JRadioButton rb = new JRadioButton(radioButton[i]);
-			final int radioButtonIndex = i+1;
+			JRadioButton rb = new JRadioButton(radioButton[i]);
+			int radioButtonIndex = i+1;
 			rb.setBounds(846, 196+i*50, 180, 49);
 			rb.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +127,7 @@ public class mainUI extends JFrame{
 	            		label.repaint();
 	            		button[3] = radioButtonIndex;
 	            		polygon = "";
-	            		temppolygon = "";
+	            		tempPolygon = "";
 	            		painted = true;
 	            	}
 	            }
@@ -141,20 +142,20 @@ public class mainUI extends JFrame{
 		btnNewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	switch(button[3]){
-            		case 1: QueryCount = query.query1(label,button,sqlTextArea,QueryCount);
+            		case 1: queryCount = new WholeRegion().query(label, button, sqlTextArea, queryCount);
             		        break;
             		        
-            		case 2: QueryCount = query.query2(label, button, pointx, pointy,sqlTextArea,QueryCount);
+            		case 2: queryCount = new PointQuery().query(label, button, pointX, pointY, sqlTextArea, queryCount);
             		        break;
             		        
-            		case 3: QueryCount = query.query3(label, button, pointx, pointy,sqlTextArea,QueryCount,polygon);
+            		case 3: queryCount = new RangeQuery().query(label, button, pointX, pointY, sqlTextArea, queryCount,polygon);
             		        break;
             		        
-            		case 4: QueryCount = query.query4b(label, pointx, pointy,sqlTextArea,QueryCount);
+            		case 4: queryCount = new SurroundingStudent().query(label, pointX, pointY, sqlTextArea, queryCount,nearstASid);
             		        break;
             		        
-            		case 5: QueryCount = query.query5(label, pointx, pointy,sqlTextArea,QueryCount);
-            		        break;
+            		case 5: queryCount = new EmergencyQuery().query(label, pointX, pointY, sqlTextArea, queryCount, nearstASid);
+            			    break;
             	}
             }
         });
@@ -173,7 +174,7 @@ public class mainUI extends JFrame{
 		scrollPane.setBounds(10, 600, 830, 60);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		frame.getContentPane().add(scrollPane);
-		
+
 //////////////////////////////mouseListener/////////////////////////////////////////////////////////////////////////////
 		panel.addMouseMotionListener(new MouseMotionAdapter(){
 		   public void mouseMoved(MouseEvent e){
@@ -197,97 +198,61 @@ public class mainUI extends JFrame{
 					//point query. draw a point and a range of it
 					
 					if(SwingUtilities.isLeftMouseButton(e)){
-						label.repaint();
-					final draw dr = new draw();
+					label.repaint();
 					
 					System.out.println("[" + e.getX() + "," + e.getY() + "]");
-					pointx = e.getX();
-					pointy = e.getY();
-					
-					pxarr[0] = pointx - 2;
-					pyarr[0] = pointy + 2;
-		            
-					pxarr[1] = pointx - 2;
-					pyarr[1] = pointy - 2;
-		            
-					pxarr[2] = pointx + 2;
-					pyarr[2] = pointy - 2;
-		            
-					pxarr[3] = pointx + 2;
-					pyarr[3] = pointy + 2;
-		            
+					pointX = e.getX();
+					pointY = e.getY();
+
+         
 					//need to schedule otherwise will have collision with previous repaint function
 					Timer timer = new Timer();
 					timer.schedule(new TimerTask() {
 						  @Override
 						  public void run() {
-							  dr.filleddraw(label,pxarr,pyarr,4,Color.red);
-							  dr.draw(label, pointx-50, pointy-50, 100, Color.red);
+							  new CircleMousePoint(pointX,pointY).render(label,Color.red);
 						  }
 						}, 30);
-					
-//					dr.filleddraw(label,pxarr,pyarr,4,Color.red);
-//					dr.draw(label, pointx-50, pointy-50, 100, Color.red);
 					}
 				}
 				else if(button[3] == 3)// draw a polygon,and record the polygon in temppolygon which will be cleared after click right mouse button
 				{
-					if(SwingUtilities.isLeftMouseButton(e))
-					{
+					if(SwingUtilities.isLeftMouseButton(e)){
 				    
-						final draw dr = new draw();
 						if(painted){
 							label.repaint();
 							painted = false;
 						}
 						System.out.println("[" + e.getX() + "," + e.getY() + "]");
-						pointx = e.getX();
-						pointy = e.getY();
-						if(temppolygon == "")
-						{
-							temppolygon = (temppolygon + " " + pointx +",  " + pointy);
+						pointX = e.getX();
+						pointY = e.getY();
+						if(tempPolygon == ""){
+							tempPolygon = (tempPolygon + " " + pointX +",  " + pointY);
 						}
-						else
-						{
-							temppolygon = (temppolygon + " , " + pointx +",  " + pointy);
+						else{
+							tempPolygon = (tempPolygon + " , " + pointX +",  " + pointY);
 						}
 						
-						
-						q.offer(pointx);
-						q.offer(pointy);
-						NodeCount++;
-					
-						pxarr[0] = pointx - 2;
-						pyarr[0] = pointy + 2;
-		            
-						pxarr[1] = pointx - 2;
-						pyarr[1] = pointy - 2;
-		            
-						pxarr[2] = pointx + 2;
-						pyarr[2] = pointy - 2;
-		            
-						pxarr[3] = pointx + 2;
-						pyarr[3] = pointy + 2;
-		            
-					
+						q.offer(pointX);
+						q.offer(pointY);
+						nodeCount++;
+
 						Timer timer = new Timer();
 						timer.schedule(new TimerTask() {
 							  @Override
 							  public void run() {
-								  dr.filleddraw(label,pxarr,pyarr,4,Color.red);
+								  new DotMousePoint(pointX, pointY).render(label,Color.red);
 							  }
 							}, 30);
-						
-//						dr.filleddraw(label,pxarr,pyarr,4,Color.red);
-						System.out.println(temppolygon);
+						System.out.println(tempPolygon);
 					}
 					if(SwingUtilities.isRightMouseButton(e))  //transfer the tempolygon to polygon and add the first node to it in order to close it.  
 					{                                         // then clear the temppolygon
 				    
-						draw dr = new draw();
+						BasicDraw draw = new BasicDraw(label);
 						painted = true;
-						int[] xarr = new int[NodeCount]; 
-					    int[] yarr = new int[NodeCount];
+						int[] xarr = new int[nodeCount]; 
+					    int[] yarr = new int[nodeCount];
 					    int i = 0;
 					    while(!q.isEmpty())
 					    {
@@ -295,39 +260,28 @@ public class mainUI extends JFrame{
 					    	yarr[i] = q.poll();
 					    	i++;
 					    }
-						dr.draw(label,xarr,yarr,NodeCount,Color.red);
-						NodeCount = 0;
-						polygon = temppolygon + "," + xarr[0] +",  " + yarr[0];
-						temppolygon = "";
+						draw.draw(xarr,yarr,nodeCount,Color.red);
+						nodeCount = 0;
+						polygon = tempPolygon + "," + xarr[0] +",  " + yarr[0];
+						tempPolygon = "";
 					}
-				}
-				else if(button[3] == 4 || button[3] == 5) //directly call query4a to draw the nearest AS,used by query4 and query5
-				{
-					if(SwingUtilities.isLeftMouseButton(e))
-					{
-				    
-					draw dr = new draw();
-					
-					System.out.println("[" + e.getX() + "," + e.getY() + "]");
-					pointx = e.getX();
-					pointy = e.getY();
-					
-					pxarr[0] = pointx - 2;
-					pyarr[0] = pointy + 2;
-		            
-					pxarr[1] = pointx - 2;
-					pyarr[1] = pointy - 2;
-		            
-					pxarr[2] = pointx + 2;
-					pyarr[2] = pointy - 2;
-		            
-					pxarr[3] = pointx + 2;
-					pyarr[3] = pointy + 2;
-		            
-					
-					dr.filleddraw(label,pxarr,pyarr,4,Color.red);
-					QueryCount = query.query4a(label, pointx, pointy,sqlTextArea,QueryCount);
-					}
+				}else if(button[3] == 4 || button[3] == 5) {//directly call query4a to draw the nearest AS,used by query4 and query5
+					label.repaint();
+					if(SwingUtilities.isLeftMouseButton(e)){
+						System.out.println("[" + e.getX() + "," + e.getY() + "]");
+						pointX = e.getX();
+						pointY = e.getY();
+						
+						Timer timer = new Timer();
+						timer.schedule(new TimerTask() {
+							  @Override
+							  public void run() {
+								  new DotMousePoint(pointX, pointY).render(label, Color.red);
+								  nearstASid = new NearstAS().query(label, pointX, pointY);
+							  }
+							}, 30);
+						
+						}
 				}
 			}
 

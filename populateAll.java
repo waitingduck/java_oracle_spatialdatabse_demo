@@ -6,7 +6,7 @@ public class populateAll{
 	public static void main(String[] args){
 		
 		//create conntection to DB
-		Connection connection = connectDB.Connect();
+		Connection connection = ConnectDB.Connect();
 		
 		
 		//create an array to store every data to populate

@@ -2,7 +2,7 @@ import java.awt.Color;
 
 import javax.swing.JLabel;
 
-public class Building implements element {
+public class Building implements Element {
 	private int[][] xy;
 public Building(int nodeNumber, int[][] nodes){
 		xy = nodes;
@@ -20,7 +20,7 @@ public Building(int nodeNumber, int[][] nodes){
 		return xy[0].length;
 	}
 	public void render(JLabel label, Color c){
-		basicDraw dr = new basicDraw();
-		dr.draw(label,xy[0],xy[1],xy[0].length,c); 
+		BasicDraw dr = new BasicDraw(label);
+		dr.draw(xy[0],xy[1],xy[0].length,c); 
 	}
 }

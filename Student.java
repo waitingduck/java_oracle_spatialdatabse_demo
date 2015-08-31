@@ -2,7 +2,7 @@ import java.awt.Color;
 
 import javax.swing.JLabel;
 
-public class Student implements element {
+public class Student implements Element {
 	private int[][] centerSquare = new int[2][4];
 	public Student(int xCenter, int yCenter){
         centerSquare[0][0] = xCenter - 5;
@@ -24,7 +24,7 @@ public class Student implements element {
 		return centerSquare[1];
 	}
 	public void render(JLabel label, Color c){
-		basicDraw dr = new basicDraw();
-		dr.filleddraw(label,centerSquare[0],centerSquare[1],4,c);  
+		BasicDraw dr = new BasicDraw(label);
+		dr.filleddraw(centerSquare[0],centerSquare[1],4,c);  
 	}
 }

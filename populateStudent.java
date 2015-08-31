@@ -18,7 +18,7 @@ public class populateStudent implements populate{
 	
 	    //try to read file
 		try{
-			inputrow = new Scanner(new FileInputStream("data\\students.xy"));
+			inputrow = new Scanner(new FileInputStream("src\\data\\students.xy"));
 		}
 		catch(FileNotFoundException e){
 			System.out.println("file is not found");
